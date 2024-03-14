@@ -20,6 +20,21 @@ const chunks = {
         nextStatementId: 'look-around-house'
       },
     ]
+  },
+  'look-around-house': {
+    title: homeTitle,
+    content: `You look around your room.`,
+    replyId: 'home-items',
+    replies: [
+      {
+        content: 'Bookcase',
+        nextStatementId: 'home-bookcase'
+      },
+      {
+        content: 'Get ready for work',
+        nextStatementId: 'prepare-for-work'
+      },
+    ]
   }
 } as Record<string, StatementChunk>
 

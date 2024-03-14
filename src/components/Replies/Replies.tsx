@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import { getReplies } from '../../data/gameConfig'
 import { useStoryStore } from '../../store/useStoryStore'
+import "./Replies.scss"
 
 export const Replies = () => {
   const statementId = useStoryStore(state => state.statementId)

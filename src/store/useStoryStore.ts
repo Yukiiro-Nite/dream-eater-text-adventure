@@ -1,7 +1,8 @@
 import { create } from 'zustand'
 import { subscribeWithSelector } from 'zustand/middleware'
-import { getStoredStory } from '../utils/storageUtils'
+import { getStoredStory, setStoredStory } from '../utils/storageUtils'
 import { gameConfig, getStatement } from '../data/gameConfig'
+import { useMenuStore } from './useMenuStore'
 
 export interface StoryData {
   id?: string
@@ -49,6 +50,13 @@ export const useStoryStore = create<StoryStore>()(
 
       const id = crypto.randomUUID()
       set({ id, statementId: statement.id })
+
+      const { addSave } = useMenuStore.getState()
+      addSave(id)
     }
   }))
 )
+
+useStoryStore.subscribe(({id, statementId}) => {
+  setStoredStory({id, statementId})
+})

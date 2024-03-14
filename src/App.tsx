@@ -7,7 +7,7 @@ import { Title } from './components/Title/Title'
 
 function App() {
   return (
-    <main>
+    <main className="App">
       <Background />
       <Title />
       <Statement />

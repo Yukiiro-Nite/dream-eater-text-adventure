@@ -1,0 +1,20 @@
+.LoadSave {
+  appearance: none;
+  font-family: "Silkscreen", sans-serif;
+  background: #00000080;
+  backdrop-filter: blur(2px);
+  border: 3px double white;
+  padding: 16px;
+
+  span {
+    font-size: 12px;
+    color: lightgray;
+    margin: 0;
+  }
+
+  p {
+    color: white;
+    font-size: 16px;
+    margin: 16px 0 0 0;
+  }
+}
