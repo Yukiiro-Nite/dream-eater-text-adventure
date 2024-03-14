@@ -1,4 +1,4 @@
-import { FlagNames, flag, setFlag } from "../../store/useGameDataStore";
+import { FlagNames, flag, setFlag, useGameStore } from "../../store/useGameDataStore";
 import { partitionStatementChunks } from "../../utils/statementUtils";
 import { StatementChunk, Title } from "../data.types";
 
@@ -28,7 +28,7 @@ const chunks = {
     replyId: 'home-items',
     replies: [
       {
-        content: 'Bookcase',
+        content: 'Look at Bookcase',
         nextStatementId: 'home-bookcase'
       },
       {
@@ -39,8 +39,17 @@ const chunks = {
       {
         content: 'Go to work',
         nextStatementId: 'exit-home',
-        condition: () => flag(FlagNames.workReady)
+        condition: () => flag(FlagNames.workReady) && !flag(FlagNames.workFinished)
       },
+      {
+        content: 'Go to bed',
+        nextStatementId: 'sleep',
+        condition: () => flag(FlagNames.workFinished),
+        action: () => {
+          const { day, setDay } = useGameStore.getState()
+          setDay(day + 1)
+        }
+      }
     ]
   },
   'home-bookcase': {
@@ -78,6 +87,23 @@ const chunks = {
         content: 'Go to work',
         nextStatementId: 'exit-home',
         condition: () => flag(FlagNames.workReady)
+      }
+    ]
+  },
+  'return-home': {
+    title: homeTitle,
+    content: 'You return home after a long day of work. Even though you spent most of the day laying down, fighting nightmares is exhausting. Hopefully they won\'t haunt your sleep. You look around your dark room before going to bed.',
+    replyId: 'home-items',
+    replies: []
+  },
+  'sleep': {
+    title: homeTitle,
+    content: 'You collapse in your bed and quickly fall asleep.',
+    replyId: 'sleep-options',
+    replies: [
+      {
+        content: 'Continue',
+        nextStatementId: 'start'
       }
     ]
   }
