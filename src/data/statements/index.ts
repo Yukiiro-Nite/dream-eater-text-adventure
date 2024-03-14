@@ -1,12 +1,15 @@
 import { Reply, Statement } from "../data.types"
+import { cityReplies, cityStatements } from "./cityStatements"
 import { homeStatements, homeReplies } from "./homeStatements"
 
 const gameStatements = [
-  ...homeStatements
+  ...homeStatements,
+  ...cityStatements,
 ] as Statement[]
 
 const gameReplies = [
-  ...homeReplies
+  ...homeReplies,
+  ...cityReplies,
 ]
 
 const statements = gameStatements.reduce((statementsById, statement) => {

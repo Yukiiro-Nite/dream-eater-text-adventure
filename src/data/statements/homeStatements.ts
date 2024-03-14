@@ -1,4 +1,4 @@
-import { useGameStore } from "../../store/useGameDataStore";
+import { FlagNames, flag, setFlag } from "../../store/useGameDataStore";
 import { partitionStatementChunks } from "../../utils/statementUtils";
 import { StatementChunk, Title } from "../data.types";
 
@@ -34,18 +34,12 @@ const chunks = {
       {
         content: 'Get ready for work',
         nextStatementId: 'prepare-for-work',
-        condition: () => {
-          const { workReady } = useGameStore.getState()
-          return !workReady
-        }
+        condition: () => !flag(FlagNames.workReady)
       },
       {
         content: 'Go to work',
         nextStatementId: 'exit-home',
-        condition: () => {
-          const { workReady } = useGameStore.getState()
-          return workReady
-        }
+        condition: () => flag(FlagNames.workReady)
       },
     ]
   },
@@ -74,10 +68,7 @@ const chunks = {
     title: homeTitle,
     content: 'You go through the motions of your daily morning routine. You prepare yourself for work.',
     replyId: 'ready-for-work',
-    action: () => {
-      const { setWorkReady } = useGameStore.getState()
-      setWorkReady(true)
-    },
+    action: () => setFlag(FlagNames.workReady, true),
     replies: [
       {
         content: 'Look around the house',
@@ -86,10 +77,7 @@ const chunks = {
       {
         content: 'Go to work',
         nextStatementId: 'exit-home',
-        condition: () => {
-          const { workReady } = useGameStore.getState()
-          return workReady
-        }
+        condition: () => flag(FlagNames.workReady)
       }
     ]
   }
