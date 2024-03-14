@@ -5,17 +5,12 @@ export const FlagNames = {
   workReady: 'workReady',
   workFinished: 'workFinished',
   cafeVisited: 'cafeVisited',
-}
-
-export interface Flags extends Record<string, boolean | undefined> {
-  workReady?: boolean,
-  workFinished?: boolean,
-  cafeVisited?: boolean,
+  cafeDrinkBought: 'cafeDrinkBought'
 }
 
 export interface GameData {
   day: number,
-  flags: Flags,
+  flags: Record<string, boolean | undefined>,
 }
 
 export interface GameStore extends GameData {
@@ -28,13 +23,13 @@ export const useGameStore = create<GameStore>()(
   subscribeWithSelector((set, get) => ({
     day: 0,
     flags: {},
-    workReady: false,
-    workFinished: false,
-    cafeVisited: false,
     setDay: (day) => set({
       day,
       flags: {
-        workReady: false, workFinished: false, cafeVisited: false 
+        workReady: false,
+        workFinished: false,
+        cafeVisited: false,
+        cafeDrinkBought: false,
       }
     }),
     setFlag: (key, val) => {

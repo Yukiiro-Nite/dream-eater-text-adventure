@@ -14,6 +14,7 @@ const chunks = {
     replies: [
       {
         content: 'Go to Office',
+        // TODO: build office
         nextStatementId: 'enter-office',
         condition: () => !flag(FlagNames.workFinished)
       },
@@ -30,6 +31,12 @@ const chunks = {
       }
     ]
   },
+  'enter-city-from-cafe': {
+    title: cityTitle,
+    content: 'You leave the cafe and return to the city streets.',
+    replyId: 'city',
+    replies: []
+  }
 } as Record<string, StatementChunk>
 
 
